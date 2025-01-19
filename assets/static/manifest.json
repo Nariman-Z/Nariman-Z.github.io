@@ -1,0 +1,18 @@
+{
+  "name": "Nariman Ziaie's Portfolio",
+  "short_name": "Nariman_Z",
+  "theme_color": "#181619",
+  "background_color": "#2c2c2c",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/index.html",
+  "description": "Nariman_Z personal website",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/assets/img/icon1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}

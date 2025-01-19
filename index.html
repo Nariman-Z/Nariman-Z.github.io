@@ -38,7 +38,11 @@
         <!--==================== CSS ====================-->
         <link rel="stylesheet" href="assets/css/styles.css">
 
+        <!--==================== FAVICON ====================-->
         <link rel="icon" href="assets/img/icon.png" type="image/png">
+
+        <!--==================== WEB APP MANIFEST ====================-->
+        <link rel="manifest" href="assets\static\manifest.json">
     </head>
     <body>
         <!--==================== HEADER ====================-->
@@ -1128,5 +1132,12 @@
 
         <!--==================== MAIN JS ====================-->
         <script src="assets/js/main.js"></script>
+        <script>
+            if (!navigator.serviceWorker.controller) {
+              navigator.serviceWorker.register("/sw.js").then(function (reg) {
+                console.log("Service worker has been registered for scope: " + reg.scope);
+              });
+            }
+        </script>
     </body>
 </html>
