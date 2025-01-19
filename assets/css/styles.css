@@ -1318,3 +1318,32 @@ input:required:invalid + .required-text {
       grid-template-columns: repeat(2, 1fr);
     }
 }
+
+.offline-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: var(--body-color);
+  color: var(--title-color);
+}
+
+.offline-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.offline-container p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.offline-container .button {
+  padding: 0.5rem 1rem;
+  background-color: var(--first-color-second);
+  color: var(--title-color);
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
