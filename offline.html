@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-    <div class="offline-container">
-        <h1>You're Offline</h1>
-        <p>It seems you are not connected to the internet. Please check your connection and try again.</p>
-        <a href="/" class="button">Go to Home</a>
-    </div>
-</body>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Offline</title>
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="icon" href="assets/img/icon512.png" type="image/png">
+        <link rel="manifest" href="assets\static\manifest.json">
+    </head>
+
+    <body>
+        <div class="offline-container">
+            <img src="/assets/img/brain.png" alt="Offline" style="max-width: 150px; margin-bottom: 1rem;">
+            <h1>You're Offline</h1>
+            <p>It seems you are not connected to the internet.<br>
+                Please check your connection and try again.</p>
+            <div>
+                <a href="/" class="button">Retry</a>
+            </div>
+        </div>
+    </body>
+
 </html>

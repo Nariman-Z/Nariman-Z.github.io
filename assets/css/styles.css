@@ -1319,6 +1319,7 @@ input:required:invalid + .required-text {
     }
 }
 
+/*==================== offline HTML ====================*/
 .offline-container {
   display: flex;
   flex-direction: column;
@@ -1328,22 +1329,34 @@ input:required:invalid + .required-text {
   text-align: center;
   background-color: var(--body-color);
   color: var(--title-color);
+  padding: 1rem;
 }
 
 .offline-container h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .offline-container p {
-  font-size: 1rem;
+  font-size: 1.125rem;
   margin-bottom: 2rem;
+  line-height: 1.5;
 }
 
 .offline-container .button {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   background-color: var(--first-color-second);
   color: var(--title-color);
   text-decoration: none;
   border-radius: 0.25rem;
+  margin: 0 0.5rem;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.offline-container .button:hover,
+.offline-container .button:focus {
+  background-color: var(--first-color-alt);
+  outline: none;
 }
