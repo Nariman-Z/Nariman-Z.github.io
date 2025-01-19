@@ -106,6 +106,17 @@ button, input[type="submit"], input[type="reset"] {
 	outline: inherit;
 }
 
+.change-language{
+  font-size: 1.25rem;
+  color: var(--first-color);
+  margin-right: var(--mb-1);
+  cursor: pointer;
+}
+
+.change-language:hover{
+  color: var(--first-color);
+}
+
 /*==================== BASE ====================*/
 * {
   box-sizing: border-box;
