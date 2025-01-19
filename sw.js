@@ -1,13 +1,13 @@
-const CACHE_NAME = "offline-v2";  // Update cache version
+const CACHE_NAME = "offline-v1";  // Update cache version
 const OFFLINE_URLS = [
     "/",
     "/index.html",
     "/offline.html",
-    "/assets/css/styles.css",               // Add CSS files
+    "/assets/css/styles.css",
     "/assets/css/swiper-bundle.min.css",
-    "/assets/js/main.js",                   // Add JS files
+    "/assets/js/main.js",
     "/assets/js/swiper-bundle.min.js",
-    "/assets/img/about.jpg",                // Add images
+    "/assets/img/about.jpg",
     "/assets/img/banner.jpg",
     "/assets/img/blob.svg",
     "/assets/img/icon.png",
@@ -25,80 +25,52 @@ const OFFLINE_URLS = [
     "/assets/img/portfolio9.jpg",
     "/assets/img/portfolio10.jpg",
     "/assets/img/project.png",
-    "/assets/pdf/Nariman Ziaie (CV).pdf"    // Add pdf files
+    "/assets/pdf/Nariman Ziaie (CV).pdf"
 ];
 
-// Install event – Precache resources
+// Install event – Pre-cache important assets
 self.addEventListener("install", event => {
-    event.waitUntil(preCache());
+    console.log("Service Worker: Installing...");
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(cache => {
+            console.log("Caching important resources...");
+            return cache.addAll(OFFLINE_URLS);
+        })
+    );
 });
-
-// Pre-cache important assets
-const preCache = () => {
-    console.log("Installing and caching important resources...");
-    return caches.open(CACHE_NAME).then(cache => {
-        return cache.addAll(OFFLINE_URLS);
-    });
-};
 
 // Fetch event – Handle requests
 self.addEventListener("fetch", event => {
-    event.respondWith(handleFetch(event.request));
-    event.waitUntil(updateCache(event.request));
-});
-
-// Handle fetch request (Network First for dynamic content, Cache First for static assets)
-const handleFetch = request => {
-    // Cache first for static assets
-    if (OFFLINE_URLS.includes(request.url) || request.url.endsWith(".html")) {
-        return caches.match(request).then(cachedResponse => {
+    event.respondWith(
+        caches.match(event.request).then(cachedResponse => {
             if (cachedResponse) {
-                console.log(`Returning cached resource: ${request.url}`);
+                console.log(`Serving cached resource: ${event.request.url}`);
                 return cachedResponse;
             }
-            return fetch(request).catch(() => returnFromCache(request));  // Fallback to cache
-        });
-    }
-    
-    // Network first for dynamic content (e.g., API requests)
-    return fetch(request).then(response => {
-        if (!response || response.status !== 200) {
-            return returnFromCache(request);  // Return from cache if failed
-        }
-        return response;
-    }).catch(() => returnFromCache(request));  // Fallback to cache if network fails
-};
-
-// Update the cache with new resources
-const updateCache = request => {
-    return caches.open(CACHE_NAME).then(cache => {
-        return fetch(request).then(response => {
-            if (response.ok) {
-                console.log(`Caching new resource: ${request.url}`);
-                cache.put(request, response);
-            }
-        }).catch(error => {
-            console.warn(`Failed to fetch resource for cache update: ${error}`);
-        });
-    });
-};
-
-// Return from cache when resource is not found in the network
-const returnFromCache = request => {
-    return caches.open(CACHE_NAME).then(cache => {
-        return cache.match(request).then(matching => {
-            if (matching) {
-                return matching;
-            }
-            // If the resource is not found, return an offline page (fallback)
-            return cache.match("offline.html");
-        });
-    });
-};
+            return fetch(event.request)
+                .then(networkResponse => {
+                    if (!networkResponse || networkResponse.status !== 200) {
+                        console.warn(`Network request failed: ${event.request.url}`);
+                        return caches.match("/offline.html");
+                    }
+                    return caches.open(CACHE_NAME).then(cache => {
+                        cache.put(event.request, networkResponse.clone());
+                        console.log(`Caching new resource: ${event.request.url}`);
+                        return networkResponse;
+                    });
+                })
+                .catch(() => {
+                    console.warn(`Offline: Fallback to offline.html for ${event.request.url}`);
+                    return caches.match("/offline.html");
+                });
+        })
+    );
+});
 
 // Activate event – Clean up old caches
 self.addEventListener("activate", event => {
     const cacheWhitelist = [CACHE_NAME];
+    console.log("Service Worker: Activating...");
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
@@ -111,4 +83,5 @@ self.addEventListener("activate", event => {
             );
         })
     );
+    self.clients.claim();
 });
