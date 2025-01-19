@@ -11,6 +11,7 @@ const OFFLINE_URLS = [
     "/assets/img/banner.jpg",
     "/assets/img/blob.svg",
     "/assets/img/icon.png",
+    "/assets/img/icon192.png",
     "/assets/img/icon1024.png",
     "/assets/img/prifil.png",
     "/assets/img/portfolio1.jpg",
