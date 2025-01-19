@@ -1360,3 +1360,24 @@ input:required:invalid + .required-text {
   background-color: var(--first-color-alt);
   outline: none;
 }
+
+/*==================== PERSIAN HTML ====================*/
+.icon-right {
+  margin-right: 0.5rem;
+  text-align: right;
+  transform: scaleX(-1);
+}
+
+.text-right {
+  font-family: 'Vazirmatn', sans-serif;
+  text-align: right;
+}
+
+.services__modal-clos-fa{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  color: var(--first-color);
+  cursor: pointer;
+}
