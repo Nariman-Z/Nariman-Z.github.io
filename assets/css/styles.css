@@ -1382,6 +1382,7 @@ input:required:invalid + .required-text {
 }
 
 .text-right {
+  font-family: Vazirmatn;
   text-align: right;
 }
 
