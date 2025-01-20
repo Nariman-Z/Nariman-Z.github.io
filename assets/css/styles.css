@@ -1,5 +1,6 @@
 /*==================== GOOGLE FONTS ====================*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap");
 
 /*==================== VARIABLES CSS ====================*/
 :root {
@@ -1375,12 +1376,12 @@ input:required:invalid + .required-text {
 /*==================== PERSIAN HTML ====================*/
 .icon-right {
   margin-right: 0.5rem;
+  margin-left: 0.5rem;
   text-align: right;
   transform: scaleX(-1);
 }
 
 .text-right {
-  font-family: 'Vazirmatn', sans-serif;
   text-align: right;
 }
 
